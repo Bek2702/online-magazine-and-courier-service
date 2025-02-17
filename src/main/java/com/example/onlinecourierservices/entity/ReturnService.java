@@ -20,13 +20,13 @@ public class ReturnService {
     private Long id;
 
     @OneToOne
-    private Order purchaseServiceId;
+    private Order purchaseService;
 
     @OneToOne
-    private User userId;
+    private User user;
 
     @OneToOne
-    private Product productsId;
+    private Product products;
 
     private Integer quantity; //qaytarilayotgan mahsulot soni
 

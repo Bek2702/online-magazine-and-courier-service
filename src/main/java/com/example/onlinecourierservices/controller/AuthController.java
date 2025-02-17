@@ -1,8 +1,8 @@
 package com.example.onlinecourierservices.controller;
 
 import com.example.onlinecourierservices.payload.ApiResult;
-import com.example.onlinecourierservices.payload.AuthLogin;
-import com.example.onlinecourierservices.payload.AuthRegister;
+import com.example.onlinecourierservices.payload.auth.AuthLogin;
+import com.example.onlinecourierservices.payload.auth.AuthRegister;
 import com.example.onlinecourierservices.payload.TokenDTO;
 import com.example.onlinecourierservices.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;

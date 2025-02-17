@@ -4,14 +4,13 @@ import com.example.onlinecourierservices.entity.User;
 import com.example.onlinecourierservices.entity.enums.UserRole;
 import com.example.onlinecourierservices.exceptions.RestException;
 import com.example.onlinecourierservices.payload.*;
+import com.example.onlinecourierservices.payload.auth.AuthLogin;
+import com.example.onlinecourierservices.payload.auth.AuthRegister;
 import com.example.onlinecourierservices.repository.UserRepository;
 import com.example.onlinecourierservices.security.JwtTokenProvider;
 import com.example.onlinecourierservices.utils.MessageConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

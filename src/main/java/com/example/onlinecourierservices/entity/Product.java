@@ -18,7 +18,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     private String description;
     @Column(nullable = false)
@@ -26,7 +26,8 @@ public class Product {
     @Column(nullable = false)
     private Integer quantity; //Ombordagi miqdori
     @ManyToOne
-    private Category Category;
+    @JoinColumn(name = "category_id",nullable = false)
+    private Category category;
     @Column(nullable = false)
     private String imageUrl;
     private String weight;

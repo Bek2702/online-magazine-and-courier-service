@@ -1,4 +1,4 @@
-package com.example.onlinecourierservices.payload;
+package com.example.onlinecourierservices.payload.auth;
 
 import com.example.onlinecourierservices.utils.MessageConstants;
 import jakarta.validation.constraints.NotBlank;
