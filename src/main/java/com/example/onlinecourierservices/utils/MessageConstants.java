@@ -59,4 +59,5 @@ public interface MessageConstants {
     String CATEGORY_ALREADY_CREATE = "Category already create";
     String CATEGORY_SUCCESSFULLY_CREATE = "Category successfully create";
     String CATEGORY_NOT_FOUND = "Category not found";
+    String CATEGORY_SUCCESSFULLY_UPDATE = "Category successfully update";
 }

@@ -25,8 +25,9 @@ public class Product {
     private Double price;
     @Column(nullable = false)
     private Integer quantity; //Ombordagi miqdori
+
     @ManyToOne
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @Column(nullable = false)
     private String imageUrl;
