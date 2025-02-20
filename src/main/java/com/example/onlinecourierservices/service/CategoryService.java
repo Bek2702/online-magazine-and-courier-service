@@ -4,34 +4,32 @@ import com.example.onlinecourierservices.entity.Category;
 import com.example.onlinecourierservices.exceptions.RestException;
 import com.example.onlinecourierservices.payload.ApiResult;
 import com.example.onlinecourierservices.payload.CategoryDTO;
-import com.example.onlinecourierservices.payload.res.ResCategory;
+import com.example.onlinecourierservices.payload.req.ReqCategory;
 import com.example.onlinecourierservices.repository.CategoryRepository;
 import com.example.onlinecourierservices.utils.MessageConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public ApiResult<String> create(CategoryDTO categoryDTO) {
-        if (categoryRepository.existsByName(categoryDTO.getName())) {
+    public ApiResult<String> create(ReqCategory reqCategory) {
+        if (categoryRepository.existsByName(reqCategory.getName())) {
             throw RestException.restThrow(MessageConstants.CATEGORY_ALREADY_CREATE);
         }
-        if (categoryDTO.getParentCategory() == null) {
-            Category parrentCategory = categoryRepository.findByName(categoryDTO.getParentCategory().getName()).orElseThrow(
+        if (reqCategory.getParentCategoryId() != 0) {
+            Category parrentCategory = categoryRepository.findById(reqCategory.getParentCategoryId()).orElseThrow(
                     () ->
                             RestException.restThrow(MessageConstants.CATEGORY_NOT_FOUND)
             );
             Category category = Category.builder()
-                    .name(categoryDTO.getName())
-                    .description(categoryDTO.getDescription())
+                    .name(reqCategory.getName())
+                    .description(reqCategory.getDescription())
                     .parentCategory(parrentCategory)
                     .build();
             categoryRepository.save(category);
@@ -39,8 +37,8 @@ public class CategoryService {
         }
 
         Category build = Category.builder()
-                .name(categoryDTO.getName())
-                .description(categoryDTO.getDescription())
+                .name(reqCategory.getName())
+                .description(reqCategory.getDescription())
                 .build();
 
         categoryRepository.save(build);
@@ -103,7 +101,7 @@ public class CategoryService {
         return ApiResult.successResponse("Category deleted");
     }
 
-    public ApiResult<String> update(Long id, ResCategory resCategory) {
+    public ApiResult<String> update(Long id, ReqCategory resCategory) {
         Category category = categoryRepository.findById(id).orElseThrow(() ->
                 RestException.restThrow(MessageConstants.CATEGORY_NOT_FOUND));
         Category parentCategory = categoryRepository.findById(resCategory.getParentCategoryId()).orElse(null);

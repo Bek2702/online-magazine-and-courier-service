@@ -1,9 +1,8 @@
 package com.example.onlinecourierservices.controller;
 
-import com.example.onlinecourierservices.entity.Category;
 import com.example.onlinecourierservices.payload.ApiResult;
 import com.example.onlinecourierservices.payload.CategoryDTO;
-import com.example.onlinecourierservices.payload.res.ResCategory;
+import com.example.onlinecourierservices.payload.req.ReqCategory;
 import com.example.onlinecourierservices.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,8 @@ public class CategoryController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<ApiResult<String>> createCategory(@RequestBody CategoryDTO categoryDTO) {
-        return ResponseEntity.ok(categoryService.create(categoryDTO));
+    public ResponseEntity<ApiResult<String>> createCategory(@RequestBody ReqCategory reqCategory) {
+        return ResponseEntity.ok(categoryService.create(reqCategory));
     }
 
     @GetMapping("/all")
@@ -47,7 +46,7 @@ public class CategoryController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
-    public ResponseEntity<ApiResult<String>> update(@PathVariable Long id, @RequestBody ResCategory resCategory) {
+    public ResponseEntity<ApiResult<String>> update(@PathVariable Long id, @RequestBody ReqCategory resCategory) {
         return ResponseEntity.ok(categoryService.update(id, resCategory));
     }
 

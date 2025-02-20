@@ -60,4 +60,11 @@ public interface MessageConstants {
     String CATEGORY_SUCCESSFULLY_CREATE = "Category successfully create";
     String CATEGORY_NOT_FOUND = "Category not found";
     String CATEGORY_SUCCESSFULLY_UPDATE = "Category successfully update";
+    String PRODUCT_NAME_CAN_NOT_EMPTY = "Product name can not be empty!";
+    String PRODUCT_PRICE_CAN_BE_EMPTY = "Product price can not be empty!";
+    String PRODUCT_QUANTITY_CAN_NOT_BE_EMPTY = "Product quantity con not be empty!";
+    String PRODUCT_CATEGORY_ID_CAN__NOT_BE_EMPTY = "Product categoryID can not be empty!";
+    String PRODUCT_NAME_ALREADY_EXISTS = "Product name already exists";
+    String PRODUCT_IMAGES_CAN_NOT_BE_EMPTY = "Product images con not be empty";
+    String PRODUCT_SUCCESSFULLY_CREATED = "Product successfully created";
 }

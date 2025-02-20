@@ -1,4 +1,4 @@
-package com.example.onlinecourierservices.payload.res;
+package com.example.onlinecourierservices.payload.req;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResCategory {
+public class ReqCategory {
     @NotBlank
     private String name;
 
