@@ -1,10 +1,13 @@
 package com.example.onlinecourierservices.service;
 
 import com.example.onlinecourierservices.entity.File;
+import com.example.onlinecourierservices.entity.Product;
 import com.example.onlinecourierservices.exceptions.RestException;
 import com.example.onlinecourierservices.payload.ApiResult;
 import com.example.onlinecourierservices.repository.FileRepository;
-import lombok.RequiredArgsConstructor;
+import com.example.onlinecourierservices.repository.ProductRepository;
+import com.example.onlinecourierservices.utils.MessageConstants;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,18 +16,27 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class FileService {
     private final FileRepository fileRepository;
-
+    private final ProductService productService;
+    private final ProductRepository productRepository;
     //local uchun
     private static final Path root = Paths.get("src/main/resources");
+
+    public FileService(FileRepository fileRepository, @Lazy ProductService productService, ProductRepository productRepository) {
+        this.fileRepository = fileRepository;
+        this.productService = productService;
+        this.productRepository = productRepository;
+    }
     //server uchun
 //    private static final Path root= Paths.get("/root");
 
-    public File saveFiles(MultipartFile file) {
+    public ApiResult<String> saveFiles(MultipartFile file, Long id) {
+        Product product = productService.getById(id);
         String director = checkingAttachmentType(file);
 
         if (director == null) {
@@ -43,12 +55,15 @@ public class FileService {
             v.setFileName(director + "/" + currentTimeMillis + "-" + file.getOriginalFilename().toString());
             v.setContentType(file.getContentType());
             v.setSize(file.getSize());
-            files =  fileRepository.save(v);
+            List<File> images = product.getImages();
+            images.add(v);
+            product.setImages(images);
+            fileRepository.save(v);
+            productRepository.save(product);
         } catch (IOException e) {
             throw RestException.restThrow(e.getMessage());
         }
-
-        return files;
+        return ApiResult.successResponse(MessageConstants.FILE_SUCCESSFULLY_SAVE);
     }
 
 

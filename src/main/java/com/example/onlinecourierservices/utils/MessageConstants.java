@@ -67,4 +67,8 @@ public interface MessageConstants {
     String PRODUCT_NAME_ALREADY_EXISTS = "Product name already exists";
     String PRODUCT_IMAGES_CAN_NOT_BE_EMPTY = "Product images con not be empty";
     String PRODUCT_SUCCESSFULLY_CREATED = "Product successfully created";
+    String FILE_SUCCESSFULLY_SAVE = "File successfully saved";
+    String PRODUCT_NOT_FOUNDED = "Product not founded";
+    String PRODUCT_SUCCESSFULLY_UPDATE = "Product successfully update";
+    String PRODUCT_SUCCESSFULLY_DELETE = "Product successfully update";
 }

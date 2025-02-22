@@ -23,6 +23,7 @@ public class SecurityConfig {
     private final AuthFilter authFilter;
 
     private final AuthEntryPoint authEntryPoint;
+    private final MyAccessDeniedHandler myAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -38,8 +39,10 @@ public class SecurityConfig {
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                        httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(authEntryPoint))
+                .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> {
+                    httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(authEntryPoint);
+                    httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(myAccessDeniedHandler);
+                })
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
