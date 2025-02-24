@@ -25,7 +25,7 @@ public class Order {
     @ManyToOne
     private User userId;
 
-    @OneToOne
+    @ManyToOne
     private Product productId;
 
     @Builder.Default

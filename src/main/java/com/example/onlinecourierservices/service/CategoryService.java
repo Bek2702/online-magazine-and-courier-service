@@ -5,13 +5,17 @@ import com.example.onlinecourierservices.exceptions.RestException;
 import com.example.onlinecourierservices.payload.ApiResult;
 import com.example.onlinecourierservices.payload.CategoryDTO;
 import com.example.onlinecourierservices.payload.req.ReqCategory;
+import com.example.onlinecourierservices.payload.res.ResPageable;
 import com.example.onlinecourierservices.repository.CategoryRepository;
 import com.example.onlinecourierservices.utils.MessageConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -112,5 +116,17 @@ public class CategoryService {
 
         categoryRepository.save(category);
         return ApiResult.successResponse(MessageConstants.CATEGORY_SUCCESSFULLY_UPDATE);
+    }
+
+    public ApiResult<ResPageable> search(String categoryName, int page, int size) {
+        Page<Category> search = categoryRepository.search(categoryName, PageRequest.of(page, size));
+        List<CategoryDTO> categoryDTOList = search.getContent().stream().map(this::parseCategoryDTO).toList();
+        return ApiResult.successResponse(ResPageable.builder()
+                .page(page)
+                .size(size)
+                .totalPage(search.getTotalPages())
+                .totalElements(search.getTotalElements())
+                .body(categoryDTOList)
+                .build());
     }
 }

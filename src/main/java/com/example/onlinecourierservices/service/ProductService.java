@@ -6,10 +6,13 @@ import com.example.onlinecourierservices.exceptions.RestException;
 import com.example.onlinecourierservices.payload.ApiResult;
 import com.example.onlinecourierservices.payload.ProductDTO;
 import com.example.onlinecourierservices.payload.req.ReqProduct;
+import com.example.onlinecourierservices.payload.res.ResPageable;
 import com.example.onlinecourierservices.repository.CategoryRepository;
 import com.example.onlinecourierservices.repository.ProductRepository;
 import com.example.onlinecourierservices.utils.MessageConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -113,4 +116,17 @@ public class ProductService {
                 .build();
     }
 
+    public ApiResult<ResPageable> search(String productName, Long categoryId, Double startPrice, Double endPrice, int page, int size) {
+        Page<Product> products = productRepository.searchGroup(productName, categoryId, startPrice, endPrice, PageRequest.of(page, size));
+
+        List<ProductDTO> productDTOList = products.getContent().stream().map(this::parceProductToProductDTO).toList();
+
+        return ApiResult.successResponse(ResPageable.builder()
+                        .page(page)
+                        .size(size)
+                        .totalPage(products.getTotalPages())
+                        .totalElements(products.getTotalElements())
+                        .body(productDTOList)
+                        .build());
+    }
 }
