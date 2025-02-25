@@ -5,6 +5,7 @@ import com.example.onlinecourierservices.utils.MessageConstants;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -16,7 +17,7 @@ public class ProductDTO {
 
     private String name;
     private String description;
-    private Double price;
+    private BigDecimal price;
     private Integer quantity;
     private String categoryName;
     private List<File> images;

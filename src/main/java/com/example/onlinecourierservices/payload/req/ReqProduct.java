@@ -5,6 +5,7 @@ import com.example.onlinecourierservices.utils.MessageConstants;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -17,7 +18,7 @@ public class ReqProduct {
     private String name;
     private String description;
     @NotBlank(message = MessageConstants.PRODUCT_PRICE_CAN_BE_EMPTY)
-    private Double price;
+    private BigDecimal price;
     @NotBlank(message = MessageConstants.PRODUCT_QUANTITY_CAN_NOT_BE_EMPTY)
     private Integer quantity;
     @NotBlank(message = MessageConstants.PRODUCT_CATEGORY_ID_CAN__NOT_BE_EMPTY)

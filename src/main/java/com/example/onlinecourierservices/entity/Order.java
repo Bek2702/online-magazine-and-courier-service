@@ -5,7 +5,9 @@ import com.example.onlinecourierservices.entity.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,24 +27,16 @@ public class Order {
     @ManyToOne
     private User userId;
 
-    @ManyToOne
-    private Product productId;
-
-    @Builder.Default
-    private Integer quantity = 1; // sotib olinayotgan mahsulot miqdori
-
     @Column(nullable = false)
-    @Builder.Default
-    private Double totalPrice = 0.0;
-
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;//(Karta, Naqd, Paypal ........)
-
+    private BigDecimal totalPrice;
 
     private OrderStatus status; //buyurtma holati (Yangi, To'langan, Bekor qilingan  ....)
-
     @CreationTimestamp
-    private LocalDateTime purchaseDate; //sotib olingan sana va vaqt
+    private LocalDateTime createAt;
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
 
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    List<OrderItems> orderItems;
 
 }

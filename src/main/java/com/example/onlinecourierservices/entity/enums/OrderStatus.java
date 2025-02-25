@@ -1,7 +1,9 @@
 package com.example.onlinecourierservices.entity.enums;
 
 public enum OrderStatus {
-    NEW,
+    PENDING,
     PAID,
+    SHIPPED,
+    DELIVERED,
     CANCELED
 }
