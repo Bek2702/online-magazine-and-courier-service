@@ -20,6 +20,7 @@ public class DeliveryDetails {
     private Long id;
 
     @OneToOne
+    @JoinColumn(nullable = false)
     private Order orderId;
 
     @Column(nullable = false)

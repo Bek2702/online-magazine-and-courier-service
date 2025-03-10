@@ -75,4 +75,8 @@ public interface MessageConstants {
     String ORDER_NOT_FOUNDED = "Order not founded";
     String ORDER_ITEMS_NOT_FOUNDED = "Order items not found";
     String ORDER_ITEMS_UPDATE = "Order items update";
+    String DELIVERY_DETAILS_SUCCESSFULLY_CREATE = "Delivery details successfully create";
+    String DELIVERY_DETAILS_NOT_FOUNDED = "Delivery details not founded";
+    String DELIVERY_DETAILS_SUCCESSFULLY_DELIVERED = "Delivery details successfully delivered";
+    String DELIVERY_DETAILS_SUCCESSFULLY_UPDATE = "Delivery details successfully update";
 }

@@ -31,4 +31,9 @@ public class OrderController {
     public ResponseEntity<ApiResult<String>> deleteOrder(@PathVariable Long id){
         return ResponseEntity.ok(orderService.deleteOrder(id));
     }
+
+    @DeleteMapping("/canceled/{id}")
+    public ResponseEntity<ApiResult<String>> cancelOrder(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.orderCanceled(id));
+    }
 }

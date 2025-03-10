@@ -87,6 +87,7 @@ public class OrderService {
     }
 
     private OrderItemsDTO parceOrderItemsDTO(OrderItems orderItem) {
+
         return OrderItemsDTO.builder()
                 .orderID(orderItem.getOrder().getId())
                 .productId(orderItem.getProduct().getId())
@@ -99,5 +100,12 @@ public class OrderService {
         Order order = orderRepository.findById(id).orElseThrow(() -> RestException.restThrow(MessageConstants.ORDER_NOT_FOUNDED));
         orderRepository.delete(order);
         return ApiResult.successResponse("Order deleted");
+    }
+
+    public ApiResult<String> orderCanceled(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> RestException.restThrow(MessageConstants.ORDER_NOT_FOUNDED));
+        order.setStatus(OrderStatus.CANCELED);
+        orderRepository.save(order);
+        return ApiResult.successResponse("Order canceled");
     }
 }
