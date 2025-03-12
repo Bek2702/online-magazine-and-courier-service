@@ -25,7 +25,6 @@ public class Reviews {
     @OneToOne
     private Product productId;
 
-    @Size(min = 1,max = 5)
     private int rating;
 
     @Column(length = 500)

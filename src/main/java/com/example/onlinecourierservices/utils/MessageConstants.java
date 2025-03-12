@@ -79,4 +79,7 @@ public interface MessageConstants {
     String DELIVERY_DETAILS_NOT_FOUNDED = "Delivery details not founded";
     String DELIVERY_DETAILS_SUCCESSFULLY_DELIVERED = "Delivery details successfully delivered";
     String DELIVERY_DETAILS_SUCCESSFULLY_UPDATE = "Delivery details successfully update";
+    String REVIEWS_SUCCESSFULLY_CREATE = "Reviews successfully create";
+    String REVIEWS_NOT_FOUNDED = "Reviews not founded";
+    String REVIEWS_SUCCESSFULLY_UPDATE = "Reviews successfully update";
 }
